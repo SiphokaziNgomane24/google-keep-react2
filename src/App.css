@@ -1,4 +1,5 @@
 .app-shell {
+<<<<<<< HEAD
   --page-bg: #f8f9fa;
   --surface: #fff;
   --text-primary: #202124;
@@ -6,6 +7,15 @@
   --border-color: #e8eaed;
   --input-bg: #f1f3f4;
   --hover-bg: #f1f3f4;
+=======
+  --page-bg: #f7f8fa;
+  --surface: #fff;
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --border-color: #e3e6e9;
+  --input-bg: #eef0f2;
+  --hover-bg: #eceff1;
+>>>>>>> d30c2c4fd383c78fddf34f42d11f09cb06a82aba
   width: 100%;
   min-height: 100vh;
   color: var(--text-primary);
@@ -25,13 +35,21 @@
 .content-shell {
   display: flex;
   align-items: flex-start;
+<<<<<<< HEAD
   min-height: calc(100vh - 73px);
+=======
+  min-height: calc(100vh - 68px);
+>>>>>>> d30c2c4fd383c78fddf34f42d11f09cb06a82aba
 }
 
 .main-panel {
   flex: 1;
   min-width: 0;
+<<<<<<< HEAD
   padding: 32px clamp(20px, 4vw, 64px);
+=======
+  padding: 32px clamp(20px, 4vw, 56px);
+>>>>>>> d30c2c4fd383c78fddf34f42d11f09cb06a82aba
 }
 
 .nav-icons {
@@ -57,8 +75,13 @@
 .menu {
   display: grid;
   place-items: center;
+<<<<<<< HEAD
   width: 44px;
   height: 44px;
+=======
+  width: 40px;
+  height: 40px;
+>>>>>>> d30c2c4fd383c78fddf34f42d11f09cb06a82aba
   border-radius: 50%;
 }
 

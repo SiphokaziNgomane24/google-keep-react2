@@ -1,9 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap');
 
 :root {
+<<<<<<< HEAD
   font-family: 'Google Sans', 'Roboto', 'Segoe UI', sans-serif;
   color: #202124;
   background: #f8f9fa;
+=======
+  font-family: 'DM Sans', sans-serif;
+  color: #202124;
+  background: #f7f8fa;
+>>>>>>> d30c2c4fd383c78fddf34f42d11f09cb06a82aba
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -13,7 +19,11 @@
 body {
   margin: 0;
   min-height: 100vh;
+<<<<<<< HEAD
   background: #f8f9fa;
+=======
+  background: #f7f8fa;
+>>>>>>> d30c2c4fd383c78fddf34f42d11f09cb06a82aba
 }
 
 #root {
@@ -30,7 +40,11 @@ input {
 }
 
 .material-symbols-outlined {
+<<<<<<< HEAD
   font-family: 'Material Symbols Outlined', sans-serif;
+=======
+  font-family: 'Material Symbols Outlined';
+>>>>>>> d30c2c4fd383c78fddf34f42d11f09cb06a82aba
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
@@ -40,9 +54,12 @@ input {
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
+<<<<<<< HEAD
   display: inline-flex;
   align-items: center;
   justify-content: center;
+=======
+>>>>>>> d30c2c4fd383c78fddf34f42d11f09cb06a82aba
   font-feature-settings: 'liga';
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   -webkit-font-feature-settings: 'liga';
