@@ -1,11 +1,11 @@
 .app-shell {
-  --page-bg: #f8f9fa;
+  --page-bg: #f7f8fa;
   --surface: #fff;
   --text-primary: #202124;
   --text-secondary: #5f6368;
-  --border-color: #e8eaed;
-  --input-bg: #f1f3f4;
-  --hover-bg: #f1f3f4;
+  --border-color: #e3e6e9;
+  --input-bg: #eef0f2;
+  --hover-bg: #eceff1;
   width: 100%;
   min-height: 100vh;
   color: var(--text-primary);
@@ -25,13 +25,13 @@
 .content-shell {
   display: flex;
   align-items: flex-start;
-  min-height: calc(100vh - 73px);
+  min-height: calc(100vh - 68px);
 }
 
 .main-panel {
   flex: 1;
   min-width: 0;
-  padding: 32px clamp(20px, 4vw, 64px);
+  padding: 32px clamp(20px, 4vw, 56px);
 }
 
 .nav-icons {
@@ -57,8 +57,8 @@
 .menu {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
 
