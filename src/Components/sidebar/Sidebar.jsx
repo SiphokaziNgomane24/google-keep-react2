@@ -3,7 +3,7 @@ import './Sidebar.css';
 function Sidebar() {
   return (
     <aside className="sidebar">
-      <div className="sidebar-item active-item" data-view="notes">
+      <div className="sidebar-item active-item active" data-view="notes">
         <span className="material-symbols-outlined hover active">lightbulb</span>
         <span className="sidebar-text">Notes</span>
       </div>

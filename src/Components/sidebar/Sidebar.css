@@ -16,23 +16,7 @@
   background: var(--surface);
 }
 
-.active {
-  background-color: #feefc3;
-  border-radius: 50%;
-  color: #202124;
-}
-
-.app-shell[data-theme='dark'] .active,
-.app-shell[data-theme='dark'] .sidebar-active-item {
-  background-color: #5f5435;
-  color: #f8f2dc;
-}
-
-.active:hover {
-  background-color: #feefc3;
-}
-
-.sidebar .sidebar-item {
+.sidebar-item {
   min-height: 48px;
   padding: 0 24px;
   display: flex;
@@ -40,27 +24,67 @@
   cursor: pointer;
   white-space: nowrap;
   border-radius: 0 24px 24px 0;
+  transition: background-color 120ms ease, transform 120ms ease;
+}
+
+.sidebar-item:hover {
+  background: var(--hover-bg);
+}
+
+.sidebar-item.active,
+.sidebar-item.active-item {
+  background-color: #feefc3;
+  color: #202124;
+}
+
+.sidebar-item.active .sidebar-text,
+.sidebar-item.active-item .sidebar-text {
+  color: #202124;
+  font-weight: 500;
+}
+
+.sidebar-item.active .material-symbols-outlined,
+.sidebar-item.active-item .material-symbols-outlined,
+.sidebar-item .material-symbols-outlined.active {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #202124;
+  background-color: #feefc3;
+}
+
+.app-shell[data-theme='dark'] .sidebar-item.active,
+.app-shell[data-theme='dark'] .sidebar-item.active-item {
+  background-color: #584f33;
+  color: #f8f2dc;
+}
+
+.app-shell[data-theme='dark'] .sidebar-item.active .material-symbols-outlined,
+.app-shell[data-theme='dark'] .sidebar-item.active-item .material-symbols-outlined,
+.app-shell[data-theme='dark'] .sidebar-item .material-symbols-outlined.active {
+  background-color: #584f33;
+  color: #f8f2dc;
 }
 
 .sidebar-item .sidebar-text {
   color: var(--text-primary);
   font-size: 14px;
-  margin-left: 24px;
+  margin-left: 20px;
 }
 
 .sidebar-item .material-symbols-outlined {
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 32px;
   height: 32px;
+  border-radius: 50%;
+  font-size: 22px;
+  color: var(--text-secondary);
 }
 
 .sidebar-item:nth-child(1) {
   margin-top: 0;
-}
-
-.sidebar-item:hover {
-  background: var(--hover-bg);
 }
 
 .sidebar-active-item {
