@@ -1,122 +1,113 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useEffect, useMemo, useState } from 'react';
+import Navbar from './Components/navbar/Navbar';
+import Sidebar from './Components/sidebar/Sidebar';
+import Form from './Components/form/Form';
+import Notes from './Components/notes/notes';
+import './App.css';
+
+const starterNotes = [
+  { id: 1, title: 'Welcome', text: 'This is a Google Keep-inspired note.', tags: ['Getting started'], color: '#fff8d6', pinned: true },
+  { id: 2, title: 'Ideas', text: 'Ship the final version with a clean layout.', tags: ['Work', 'Ideas'], color: '#e8f0fe', pinned: false },
+  { id: 3, title: 'Checklist', text: 'Review the dashboard, fix lint issues, and test the build.', tags: ['Work'], color: '#e6f4ea', pinned: false },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [notes, setNotes] = useState(starterNotes);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [darkMode, setDarkMode] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+
+  useEffect(() => {
+    const updateTime = () => setCurrentTime(Date.now());
+    updateTime();
+    const timerId = window.setInterval(updateTime, 15000);
+    return () => window.clearInterval(timerId);
+  }, []);
+
+  const filteredNotes = useMemo(() => {
+    const query = searchTerm.trim().toLocaleLowerCase();
+    return notes
+      .filter((note) => (
+        !query
+        || [note.title, note.text, ...(note.tags ?? [])]
+          .some((value) => value.toLocaleLowerCase().includes(query))
+      ))
+      .sort((first, second) => Number(second.pinned) - Number(first.pinned));
+  }, [notes, searchTerm]);
+
+  function addNote(note) {
+    setNotes((currentNotes) => [{ ...note, id: crypto.randomUUID(), pinned: false }, ...currentNotes]);
+  }
+
+  function updateNote(noteId, updates) {
+    setNotes((currentNotes) => currentNotes.map((note) => (
+      note.id === noteId ? { ...note, ...updates } : note
+    )));
+  }
+
+  function reorderNotes(draggedId, targetId) {
+    setNotes((currentNotes) => {
+      const sourceIndex = currentNotes.findIndex((note) => String(note.id) === draggedId);
+      const targetIndex = currentNotes.findIndex((note) => String(note.id) === targetId);
+      if (sourceIndex < 0 || targetIndex < 0 || sourceIndex === targetIndex) {
+        return currentNotes;
+      }
+
+      const reordered = [...currentNotes];
+      const [draggedNote] = reordered.splice(sourceIndex, 1);
+      const insertionIndex = sourceIndex < targetIndex ? targetIndex - 1 : targetIndex;
+      reordered.splice(insertionIndex, 0, draggedNote);
+      return reordered;
+    });
+  }
+
+  const dueReminders = notes.filter((note) => (
+    note.reminderAt && new Date(note.reminderAt).getTime() <= currentTime
+  ));
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    <div className="app-shell" data-theme={darkMode ? 'dark' : 'light'}>
+      <Navbar
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        darkMode={darkMode}
+        onToggleDarkMode={() => setDarkMode((isDark) => !isDark)}
+      />
+      <div className="content-shell">
+        <Sidebar />
+        <main className="main-panel">
+          {dueReminders.length > 0 && (
+            <section className="reminder-banner" aria-label="Due reminders" role="status">
+              <span className="material-symbols-outlined" aria-hidden="true">notifications_active</span>
+              <div>
+                <strong>Reminder due</strong>
+                <ul>
+                  {dueReminders.map((note) => (
+                    <li key={note.id}>
+                      {note.title || note.text}
+                      <button
+                        type="button"
+                        onClick={() => updateNote(note.id, { reminderAt: null })}
+                      >
+                        Dismiss
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          )}
+          <Form onAddNote={addNote} />
+          <Notes
+            notes={filteredNotes}
+            onUpdateNote={updateNote}
+            onReorderNotes={reorderNotes}
+            hasSearch={Boolean(searchTerm.trim())}
+          />
+        </main>
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;
