@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .modal {
   position: fixed;
   top: 0;
@@ -19,26 +18,4 @@
 
 .open-modal {
   visibility: visible;
-=======
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 100%;
-  visibility: hidden;
-}
-
-.modal .modal-content {
-  width: 589px;
-  position: relative;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.open-modal {
-  visibility: visible;
->>>>>>> d30c2c4fd383c78fddf34f42d11f09cb06a82aba
 }
